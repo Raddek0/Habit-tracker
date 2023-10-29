@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { useDispatch } from "react-redux";
 import AddGoalButton from "./AddGoalButton/AddGoalButton";
 import UpdateGoalButton from "./UpdateGoalButton/UpdateGoalButton";
 import DeleteGoalButton from "./DeleteGoalButton/DeleteGoalButton";
-import HabitGoals from "components/HabitGoals/HabitGoals";
 import { useGoalsContext } from "GoalsContext";
 
 const fadeInAnimation = keyframes`

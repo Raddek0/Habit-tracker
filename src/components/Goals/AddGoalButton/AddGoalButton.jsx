@@ -79,23 +79,10 @@ const AddGoalButton = ({ onGoalAdded }) => {
       return;
     } else {
       const localGoals = JSON.parse(localStorage.getItem("goals")) || [];
-      // const habitData = {
-      //   habitName: null,
-      //   checkboxes: {
-      //     Monday: null,
-      //     Tuesday: null,
-      //     Wednesday: null,
-      //     Thursday: null,
-      //     Friday: null,
-      //     Saturday: null,
-      //     Sunday: null,
-      //   },
-      // };
       const newGoal = {
         id: localGoals.length,
         name: goalName,
         habits: [],
-        // habits: habitData,
       };
 
       localGoals.push(newGoal);

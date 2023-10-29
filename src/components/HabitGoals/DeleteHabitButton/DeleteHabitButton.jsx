@@ -52,9 +52,6 @@ const DeleteHabitButton = ({ goalId, habitName, onHabitDeleted }) => {
   const closeModal = () => setShowModal(false);
 
   const handleDelete = () => {
-    // You can perform any additional logic before deleting the habit if needed
-
-    // Trigger the callback to delete the habit
     onHabitDeleted(goalId, habitName);
 
     closeModal();

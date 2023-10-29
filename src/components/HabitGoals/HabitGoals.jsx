@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled, { keyframes } from "styled-components";
 import AddHabitButton from "./AddHabitButton/AddHabitButton";
 import Habits from "./Habits/Habits";

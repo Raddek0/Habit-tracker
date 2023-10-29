@@ -64,7 +64,6 @@ const Habits = ({ goalId }) => {
   const handleHabitDeleted = (goalId, habitName) => {
     const updatedGoals = AllGoals.map((goal) => {
       if (goal.id === goalId) {
-        // Filter out the deleted habit from the 'habits' array
         goal.habits = goal.habits.filter(
           (habit) => habit.habitName !== habitName
         );
@@ -74,12 +73,10 @@ const Habits = ({ goalId }) => {
 
     setAllGoals(updatedGoals);
 
-    // Update the 'habits' state as well
     const updatedHabits =
       updatedGoals.find((goal) => goal.id === goalId)?.habits || [];
     setHabits(updatedHabits);
 
-    // Update local storage
     localStorage.setItem("goals", JSON.stringify(updatedGoals));
   };
 
