@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import DateTime from "components/Date/DateTime";
+import { FaRegChartBar } from "react-icons/fa";
 
 const MainContainer = styled.div`
   min-height: 100vh;
@@ -30,6 +32,10 @@ const NavigationItem = styled.a`
   cursor: pointer;
   color: black;
   text-decoration: none;
+  padding: 10px;
+`;
+const NavigationItemText = styled.text`
+  padding-right: 6px;
 `;
 const NavigationItemWelcome = styled.a`
   font-size: 25px;
@@ -41,7 +47,8 @@ const NavigationItemWelcome = styled.a`
   margin-left: 5px;
 `;
 const MainPageTitle = styled.div`
-  height: 55vh;
+  padding-top: 120px;
+  padding-bottom: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,6 +62,7 @@ const MainPageDesc = styled.div`
   align-items: center;
   font-size: 40px;
   font-family: "Courier New";
+  padding-bottom: 40px;
 `;
 
 const Welcome = () => {
@@ -68,11 +76,16 @@ const Welcome = () => {
           <NavigationItem as="a" href="/habits">
             MyHabits
           </NavigationItem>
+          <NavigationItem as="a" href="/charts">
+            <NavigationItemText>MyCharts</NavigationItemText>
+            <FaRegChartBar />
+          </NavigationItem>
           <NavigationItemWelcome>Hi User</NavigationItemWelcome>
         </NavigationContainer>
       </NavBar>
       <MainPageTitle>Welcome</MainPageTitle>
       <MainPageDesc>Maintain your habits in the best app!</MainPageDesc>
+      <DateTime />
     </MainContainer>
   );
 };

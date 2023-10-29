@@ -14,6 +14,13 @@ const MobileContainer = styled.div`
   }
 `;
 
+const cos = styled.div`
+  width: 100px;
+  height: 100px;
+  z-index: 6456400;
+  background-color: red;
+`;
+
 const Welcome = () => {
   return (
     <>

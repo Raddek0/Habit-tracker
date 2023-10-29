@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Goals from "components/Goals/Goals";
 import HabitGoals from "components/HabitGoals/HabitGoals";
+import { FaHome } from "react-icons/fa";
+import { FaRegChartBar } from "react-icons/fa";
 
 const GridContainer = styled.div`
   display: grid;
@@ -45,6 +47,9 @@ const HeaderItem = styled.a`
   text-decoration: none;
   padding-bottom: 10px;
 `;
+const HeaderItemText = styled.text`
+  padding-right: 5px;
+`;
 
 const MyHabitsDesktop = () => {
   return (
@@ -55,8 +60,11 @@ const MyHabitsDesktop = () => {
       </NavContainer>
       <MainContainer>
         <HeaderContainer>
+          <HeaderItem as="a" href="/charts">
+            <HeaderItemText>MyCharts</HeaderItemText> <FaRegChartBar />
+          </HeaderItem>
           <HeaderItem as="a" href="/">
-            Habit-tracker
+            <FaHome />
           </HeaderItem>
         </HeaderContainer>
         <HabitGoals />

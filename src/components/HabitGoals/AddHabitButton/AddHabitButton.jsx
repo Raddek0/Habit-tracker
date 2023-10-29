@@ -83,13 +83,13 @@ const AddHabitButton = ({ goalId, onHabitAdded }) => {
       const newHabitData = {
         habitName: habitName,
         checkboxes: {
-          Monday: null,
-          Tuesday: null,
-          Wednesday: null,
-          Thursday: null,
-          Friday: null,
-          Saturday: null,
-          Sunday: null,
+          Monday: false,
+          Tuesday: false,
+          Wednesday: false,
+          Thursday: false,
+          Friday: false,
+          Saturday: false,
+          Sunday: false,
         },
       };
 

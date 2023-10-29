@@ -21,6 +21,11 @@ const HabitTitle = styled.div`
   padding: 12px;
   margin-left: 10px;
 `;
+const HabitHeaderButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 10vh;
+`;
 const HabitDayContainer = styled.div`
   display: flex;
   justify-content: space-around;
@@ -36,6 +41,18 @@ const HabitError = styled.div`
   display: flex;
   justify-content: center;
 `;
+const ResetButton = styled.button`
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #9da631;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: #d32f2f;
+  }
+`;
 
 const Habits = ({ goalId }) => {
   const { AllGoals, setAllGoals } = useGoalsContext();
@@ -47,6 +64,25 @@ const Habits = ({ goalId }) => {
       setHabits(currentGoal.habits || []);
     }
   }, [goalId, AllGoals]);
+
+  const handleCheckboxChange = (habitIndex, day) => {
+    const updatedHabits = [...habits];
+    updatedHabits[habitIndex].checkboxes[day] =
+      !updatedHabits[habitIndex].checkboxes[day];
+
+    setHabits(updatedHabits);
+
+    const updatedGoals = AllGoals.map((goal) => {
+      if (goal.id === goalId) {
+        goal.habits = updatedHabits;
+      }
+      return goal;
+    });
+
+    setAllGoals(updatedGoals);
+
+    localStorage.setItem("goals", JSON.stringify(updatedGoals));
+  };
 
   const handleHabitAdded = (newHabitData) => {
     const updatedGoals = AllGoals.map((goal) => {
@@ -80,6 +116,30 @@ const Habits = ({ goalId }) => {
     localStorage.setItem("goals", JSON.stringify(updatedGoals));
   };
 
+  const handleReset = (habitName) => {
+    const updatedHabits = habits.map((habit) => {
+      if (habit.habitName === habitName) {
+        Object.keys(habit.checkboxes).forEach((day) => {
+          habit.checkboxes[day] = false;
+        });
+      }
+      return habit;
+    });
+
+    setHabits(updatedHabits);
+
+    const updatedGoals = AllGoals.map((goal) => {
+      if (goal.id === goalId) {
+        goal.habits = updatedHabits;
+      }
+      return goal;
+    });
+
+    setAllGoals(updatedGoals);
+
+    localStorage.setItem("goals", JSON.stringify(updatedGoals));
+  };
+
   return (
     <>
       {habits.map((habit, habitIndex) => (
@@ -87,42 +147,82 @@ const Habits = ({ goalId }) => {
           <HabitDesc key={habitIndex}>
             <HabitHeader>
               <HabitTitle>{habit.habitName}</HabitTitle>
-              <DeleteHabitButton
-                goalId={goalId}
-                habitName={habit.habitName}
-                onHabitDeleted={() =>
-                  handleHabitDeleted(goalId, habit.habitName)
-                }
-              />
+              <HabitHeaderButtons>
+                <ResetButton onClick={() => handleReset(habit.habitName)}>
+                  Reset
+                </ResetButton>
+                <DeleteHabitButton
+                  goalId={goalId}
+                  habitName={habit.habitName}
+                  onHabitDeleted={() =>
+                    handleHabitDeleted(goalId, habit.habitName)
+                  }
+                />
+              </HabitHeaderButtons>
             </HabitHeader>
-            <HabitDayContainer>
+            <HabitDayContainer key={habitIndex}>
               <DayCon>
                 <label>MON</label>
-                <input type="checkbox" id={`Monday-${habitIndex + 1}`} />
+                <input
+                  type="checkbox"
+                  id={`Monday-${habitIndex + 1}`}
+                  checked={habit.checkboxes.Monday}
+                  onChange={() => handleCheckboxChange(habitIndex, "Monday")}
+                />
               </DayCon>
               <DayCon>
                 <label>TUE</label>
-                <input type="checkbox" id={`Tuesday-${habitIndex + 1}`} />
+                <input
+                  type="checkbox"
+                  id={`Tuesday-${habitIndex + 1}`}
+                  checked={habit.checkboxes.Tuesday}
+                  onChange={() => handleCheckboxChange(habitIndex, "Tuesday")}
+                />
               </DayCon>
               <DayCon>
                 <label>WED</label>
-                <input type="checkbox" id={`Wednesday-${habitIndex + 1}`} />
+                <input
+                  type="checkbox"
+                  id={`Wednesday-${habitIndex + 1}`}
+                  checked={habit.checkboxes.Wednesday}
+                  onChange={() => handleCheckboxChange(habitIndex, "Wednesday")}
+                />
               </DayCon>
               <DayCon>
                 <label>THU</label>
-                <input type="checkbox" id={`Thursday-${habitIndex + 1}`} />
+                <input
+                  type="checkbox"
+                  id={`Thursday-${habitIndex + 1}`}
+                  checked={habit.checkboxes.Thursday}
+                  onChange={() => handleCheckboxChange(habitIndex, "Thursday")}
+                />
               </DayCon>
               <DayCon>
                 <label>FRI</label>
-                <input type="checkbox" id={`Friday-${habitIndex + 1}`} />
+                <input
+                  type="checkbox"
+                  id={`Friday-${habitIndex + 1}`}
+                  checked={habit.checkboxes.Friday}
+                  onChange={() => handleCheckboxChange(habitIndex, "Friday")}
+                />
               </DayCon>
               <DayCon>
                 <label>SAT</label>
-                <input type="checkbox" id={`Saturday-${habitIndex + 1}`} />
+                <input
+                  type="checkbox"
+                  id={`Saturday-${habitIndex + 1}`}
+                  checked={habit.checkboxes.Saturday}
+                  onChange={() => handleCheckboxChange(habitIndex, "Saturday")}
+                />
               </DayCon>
               <DayCon>
                 <label>SUN</label>
-                <input type="checkbox" id={`Sunday-${habitIndex + 1}`} />
+                <input
+                  type="checkbox"
+                  id={`Sunday-${habitIndex + 1}`}
+                  checked={habit.checkboxes.Sunday}
+                  onChange={() => handleCheckboxChange(habitIndex, "Sunday")}
+                />
               </DayCon>
             </HabitDayContainer>
           </HabitDesc>
